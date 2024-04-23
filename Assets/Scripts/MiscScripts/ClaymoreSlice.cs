@@ -7,7 +7,10 @@ public class ClaymoreSlice : MonoBehaviour
 	PlayerCombat player;
 	
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("collided");
+		if (other.gameObject.tag == "Enemy") {
+			player.hitEnemy();
+			other.gameObject.GetComponent<EnemyHealth>().takeHit(1);
+		}			
 	}
 	
     public void FinishAnim() {

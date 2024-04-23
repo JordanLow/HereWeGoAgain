@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 86029023}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,7 +316,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldownDuration: 0.2
   claymoreSlice: {fileID: 5763959065007716424, guid: 8d6650a70a6d00a4fb33db10b2ebad87, type: 3}
-  indicatorOrigin: {fileID: 0}
+  specialClaymore: {fileID: 0}
+  indicatorOrigin: {fileID: 608268399}
+  resource: 0
 --- !u!1 &280091385
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +782,53 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1732181918}
+--- !u!1 &1316618962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316618963}
+  - component: {fileID: 1316618964}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1316618963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316618962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1316618964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316618962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a9431e34fbcc8449153eb06d4535e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSpawn: {fileID: 7232977460234323650, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
+  spawnLocation: {fileID: 1316618963}
+  spawnFreq: 5
 --- !u!1 &1732181917
 GameObject:
   m_ObjectHideFlags: 3
