@@ -134,10 +134,12 @@ GameObject:
   - component: {fileID: 86029019}
   - component: {fileID: 86029018}
   - component: {fileID: 86029020}
+  - component: {fileID: 86029025}
   - component: {fileID: 86029021}
   - component: {fileID: 86029024}
   - component: {fileID: 86029022}
   - component: {fileID: 86029023}
+  - component: {fileID: 86029026}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -254,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b2bd93dbe0ceb4d98123d0a94c1218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 4
 --- !u!50 &86029022
 Rigidbody2D:
   serializedVersion: 4
@@ -273,7 +275,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &86029023
@@ -293,7 +295,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.6}
+    oldSize: {x: 1, y: 1.2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -319,6 +321,39 @@ MonoBehaviour:
   specialClaymore: {fileID: 0}
   indicatorOrigin: {fileID: 608268399}
   resource: 0
+--- !u!114 &86029025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86029017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50e016de9bf89d468f49a8b7b8e8cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!95 &86029026
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86029017}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 142919cd5cd0d884c9fe537378374f88, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &280091385
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,8 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a9431e34fbcc8449153eb06d4535e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 7232977460234323650, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
-  spawnLocation: {fileID: 1316618963}
+  toSpawn: {fileID: 1081442100680977906, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
   spawnFreq: 5
 --- !u!1 &1732181917
 GameObject:

@@ -9,14 +9,20 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
 	
+	Animator animator;
 	Vector2 moveInput;
 	Vector2 mousePosition;
 	float thrusting = 0f;
 	[SerializeField] float moveSpeed;
 	
+	void Start() {
+		animator = GetComponent<Animator>();
+	}
+	
 	void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        if (thrusting > 0f) return;
+		moveInput = value.Get<Vector2>();
     }
 
 	void OnAim(InputValue value) {
@@ -25,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+		animator.SetBool("Moving", false);
 		float move = moveSpeed;
 		if (thrusting > 0f) {
 			GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput.x * move, moveInput.y * move);
@@ -32,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 			if (thrusting <= 0f) thrusting = 0f;
 			return;
 		}
+		if (moveInput.x != 0 || moveInput.y != 0) animator.SetBool("Moving", true);
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput.x * move, moveInput.y * move);
 		transform.localScale = new Vector2((Mathf.Sign(mousePosition.x - Screen.width/2)) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
     }
