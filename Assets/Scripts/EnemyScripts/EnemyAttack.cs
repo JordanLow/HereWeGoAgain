@@ -8,6 +8,7 @@ public class EnemyAttack : MonoBehaviour
 	[SerializeField] float contactDamageCooldownDuration = 0.25f;
 	Material mat;
 	EnemyMovement movement;
+	Animator animator;
 	
 	bool attacking = false;
 	
@@ -16,6 +17,7 @@ public class EnemyAttack : MonoBehaviour
 	void Start() {
 		movement = GetComponent<EnemyMovement>();
 		mat = GetComponent<SpriteRenderer>().material;
+		animator = GetComponent<Animator>();
 	}
 	
 	void OnTriggerStay2D(Collider2D other) {
@@ -48,9 +50,10 @@ public class EnemyAttack : MonoBehaviour
 		attacking = true;
 		movement.SetMovementLockout(true);
 		mat.SetFloat("_FlashAmount", 0.6f);
+		// Make it flash blink multiple times
 		yield return new WaitForSeconds(0.6f);
-		mat.SetFloat("_FlashAmount", 0f);
-		// Animator play attack, settle attack movement with animation
+		animator.SetTrigger("HobblerAttacking");
+		mat.SetFloat("_FlashAmount", 0f);;
 		yield return new WaitForSeconds(1f);
 		attacking = false;
 		movement.SetMovementLockout(false);

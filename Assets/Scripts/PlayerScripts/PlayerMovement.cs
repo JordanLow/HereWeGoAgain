@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 {
 	
 	Animator animator;
+	AudioSource audioS; // potentially outsource this to a different script if tighter control of the looping/start-stop becomes an issue
+	// Hopefully as many of the intricacies can be addressed through the design of the actual soundbite 
 	Vector2 moveInput;
 	Vector2 mousePosition;
 	float thrusting = 0f;
@@ -17,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
 	
 	void Start() {
 		animator = GetComponent<Animator>();
+		audioS = GetComponent<AudioSource>();
 	}
 	
 	void OnMove(InputValue value)
     {
         if (thrusting > 0f) return;
+		animator.SetBool("Moving", true);
+		if (!audioS.isPlaying) audioS.Play();
 		moveInput = value.Get<Vector2>();
     }
 
@@ -31,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-		animator.SetBool("Moving", false);
 		float move = moveSpeed;
 		if (thrusting > 0f) {
 			GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput.x * move, moveInput.y * move);
@@ -39,7 +43,10 @@ public class PlayerMovement : MonoBehaviour
 			if (thrusting <= 0f) thrusting = 0f;
 			return;
 		}
-		if (moveInput.x != 0 || moveInput.y != 0) animator.SetBool("Moving", true);
+		if (moveInput.magnitude == 0) {
+			animator.SetBool("Moving", false);
+			audioS.Stop();
+		}
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput.x * move, moveInput.y * move);
 		transform.localScale = new Vector2((Mathf.Sign(mousePosition.x - Screen.width/2)) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
     }
@@ -47,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	public void Thrust(Quaternion rotation) {
 		thrusting = 2f;
-		
+		animator.SetBool("Moving", false);
 		Vector3 forwardDirection = rotation * Vector3.forward;
         moveInput = new Vector2(forwardDirection.x, forwardDirection.y);
         moveInput.Normalize();
