@@ -163,6 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contactDamageCooldownDuration: 0.25
+  attackColor: {r: 1, g: 0, b: 0, a: 0}
+  stunColor: {r: 1, g: 0.9371726, b: 0, a: 0}
 --- !u!114 &1081442100680977417
 MonoBehaviour:
   m_ObjectHideFlags: 0

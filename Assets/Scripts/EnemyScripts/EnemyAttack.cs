@@ -6,6 +6,8 @@ public class EnemyAttack : MonoBehaviour
 {
 	
 	[SerializeField] float contactDamageCooldownDuration = 0.25f;
+	[SerializeField] Color attackColor;
+	[SerializeField] Color stunColor;
 	Material mat;
 	EnemyMovement movement;
 	Animator animator;
@@ -45,16 +47,36 @@ public class EnemyAttack : MonoBehaviour
 		}
     }
 	
-	
 	private IEnumerator MakeAttack() {
 		attacking = true;
 		movement.SetMovementLockout(true);
-		mat.SetFloat("_FlashAmount", 0.6f);
-		// Make it flash blink multiple times
-		yield return new WaitForSeconds(0.6f);
+		mat.SetColor("_FlashColor", attackColor);
+		mat.SetFloat("_FlashAmount", 0.7f);
+		yield return new WaitForSeconds(0.2f);
+		mat.SetFloat("_FlashAmount", 0.15f);
+		yield return new WaitForSeconds(0.15f);
+		mat.SetFloat("_FlashAmount", 0.7f);
+		yield return new WaitForSeconds(0.15f);
+		mat.SetFloat("_FlashAmount", 0.15f);
+		yield return new WaitForSeconds(0.1f);
+		mat.SetFloat("_FlashAmount", 0.7f);
+		yield return new WaitForSeconds(0.1f);
 		animator.SetTrigger("HobblerAttacking");
-		mat.SetFloat("_FlashAmount", 0f);;
-		yield return new WaitForSeconds(1f);
+		mat.SetFloat("_FlashAmount", 0f);
+		// Change flash colour to Yellow and then do the flashing thing for this stun duration
+		mat.SetColor("_FlashColor", stunColor);
+		yield return new WaitForSeconds(0.3f);
+		mat.SetFloat("_FlashAmount", 0.7f);
+		yield return new WaitForSeconds(0.1f);
+		mat.SetFloat("_FlashAmount", 0.15f);
+		yield return new WaitForSeconds(0.15f);
+		mat.SetFloat("_FlashAmount", 0.7f);
+		yield return new WaitForSeconds(0.2f);
+		mat.SetFloat("_FlashAmount", 0.15f);
+		yield return new WaitForSeconds(0.25f);
+		mat.SetFloat("_FlashAmount", 0.7f);
+		yield return new WaitForSeconds(0.3f);
+		mat.SetFloat("_FlashAmount", 0f);
 		attacking = false;
 		movement.SetMovementLockout(false);
 	}
