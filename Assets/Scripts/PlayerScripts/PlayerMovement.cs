@@ -10,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	
 	Animator animator;
-	AudioSource audioS; // potentially outsource this to a different script if tighter control of the looping/start-stop becomes an issue
-	// Hopefully as many of the intricacies can be addressed through the design of the actual soundbite 
+	AudioSource audioS;
 	Vector2 moveInput;
 	Vector2 mousePosition;
 	float thrusting = 0f;
@@ -26,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (thrusting > 0f) return;
 		animator.SetBool("Moving", true);
-		if (!audioS.isPlaying) audioS.Play();
 		moveInput = value.Get<Vector2>();
     }
 
@@ -45,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 		if (moveInput.magnitude == 0) {
 			animator.SetBool("Moving", false);
-			audioS.Stop();
 		}
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput.x * move, moveInput.y * move);
 		transform.localScale = new Vector2((Mathf.Sign(mousePosition.x - Screen.width/2)) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
@@ -61,6 +58,11 @@ public class PlayerMovement : MonoBehaviour
 		Debug.Log("Rotation direction as Vector3: " + forwardDirection);
 		Debug.Log("Rotation direction as Vector2: " + moveInput);
 		
+	}
+	
+	public void FootstepLand() {
+		// Play the footstep sound effect via AnimationEvents to ensure sound-animation sync
+		audioS.Play();
 	}
 	
 	public Vector2 GetMousePos() {
