@@ -12,6 +12,9 @@ public class EnemyAttack : MonoBehaviour
 	EnemyMovement movement;
 	Animator animator;
 	
+	float[] windUpFlashArray = { 0.2f, 0.15f, 0.15f, 0.1f, 0.1f };
+	float[] coolDownFlashArray = { 0.1f, 0.15f, 0.2f, 0.25f, 0.3f };
+	
 	bool attacking = false;
 	
 	float contactDamageCooldown = 0f;
@@ -51,31 +54,29 @@ public class EnemyAttack : MonoBehaviour
 		attacking = true;
 		movement.SetMovementLockout(true);
 		mat.SetColor("_FlashColor", attackColor);
-		mat.SetFloat("_FlashAmount", 0.7f);
-		yield return new WaitForSeconds(0.2f);
-		mat.SetFloat("_FlashAmount", 0.15f);
-		yield return new WaitForSeconds(0.15f);
-		mat.SetFloat("_FlashAmount", 0.7f);
-		yield return new WaitForSeconds(0.15f);
-		mat.SetFloat("_FlashAmount", 0.15f);
-		yield return new WaitForSeconds(0.1f);
-		mat.SetFloat("_FlashAmount", 0.7f);
-		yield return new WaitForSeconds(0.1f);
+		mat.SetFloat("_FlashAmount", 0.7f); // Begin the attack flashing
+
+		float flashAmount = 0.15f;
+		foreach (float interval in windUpFlashArray) {
+			yield return new WaitForSeconds(interval);
+			mat.SetFloat("_FlashAmount", flashAmount);
+			flashAmount = flashAmount == 0.15f ? 0.7f : 0.15f;
+		}
+		
 		animator.SetTrigger("HobblerAttacking");
 		mat.SetFloat("_FlashAmount", 0f);
-		// Change flash colour to Yellow and then do the flashing thing for this stun duration
+
 		mat.SetColor("_FlashColor", stunColor);
-		yield return new WaitForSeconds(0.3f);
-		mat.SetFloat("_FlashAmount", 0.7f);
-		yield return new WaitForSeconds(0.1f);
-		mat.SetFloat("_FlashAmount", 0.15f);
-		yield return new WaitForSeconds(0.15f);
-		mat.SetFloat("_FlashAmount", 0.7f);
-		yield return new WaitForSeconds(0.2f);
-		mat.SetFloat("_FlashAmount", 0.15f);
-		yield return new WaitForSeconds(0.25f);
-		mat.SetFloat("_FlashAmount", 0.7f);
-		yield return new WaitForSeconds(0.3f);
+		yield return new WaitForSeconds(0.3f); // Duration of the attack
+		
+		mat.SetFloat("_FlashAmount", 0.7f); // Begin the stun flashing
+		flashAmount = 0.15f;
+		foreach (float interval in coolDownFlashArray) {
+			yield return new WaitForSeconds(interval);
+			mat.SetFloat("_FlashAmount", flashAmount);
+			flashAmount = flashAmount == 0.15f ? 0.7f : 0.15f;
+		}
+
 		mat.SetFloat("_FlashAmount", 0f);
 		attacking = false;
 		movement.SetMovementLockout(false);
