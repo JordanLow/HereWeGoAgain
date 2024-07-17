@@ -52,6 +52,7 @@ public class EnemyAttack : MonoBehaviour
 	
 	private IEnumerator MakeAttack() {
 		attacking = true;
+		animator.SetBool("HobblerFreeze", true);
 		movement.SetMovementLockout(true);
 		mat.SetColor("_FlashColor", attackColor);
 		mat.SetFloat("_FlashAmount", 0.7f); // Begin the attack flashing
@@ -79,6 +80,7 @@ public class EnemyAttack : MonoBehaviour
 
 		mat.SetFloat("_FlashAmount", 0f);
 		attacking = false;
+		animator.SetBool("HobblerFreeze", false);
 		movement.SetMovementLockout(false);
 	}
 }
