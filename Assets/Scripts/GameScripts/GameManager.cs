@@ -2,28 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Slider timerSlider;
-    public float timer = 300f; //In seconds
+    [SerializeField] TextMeshProUGUI timerText;
+    public float timer = 300f; // In seconds
+
     public bool bossSpawned{get;set;}
+
     void Start()
     {
-        timerSlider.maxValue = timer;
+        timerText.text = string.Format("{0:00}:{1:00}", Mathf.FloorToInt(timer / 60), Mathf.FloorToInt(timer % 60));
         bossSpawned = false;
     }
+
     void Update()
     {
         if (!bossSpawned)
         {
             timer = timer - Time.deltaTime;
-            timerSlider.value = timer;
             if (timer <= 0f)
             {
                 SpawnBoss();
-            }
+				timerText.text = "!!BOSS!!";
+            } else {
+				timerText.text = string.Format("{0:00}:{1:00}", Mathf.FloorToInt(timer / 60), Mathf.FloorToInt(timer % 60));
+			}
         }
     }
 

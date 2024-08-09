@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClaymoreSlice : MonoBehaviour
+public class ClaymoreThrust : MonoBehaviour
 {
-	PlayerCombat player;
+    PlayerCombat player;
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Enemy") {
-			player.hitEnemy();
-			other.gameObject.GetComponent<EnemyHealth>().takeHit(1);
+			other.gameObject.GetComponent<EnemyHealth>().takeHit(3);
 		}			
 	}
-
+	
     public void FinishAnim() {
 		Destroy(gameObject);
 	}
