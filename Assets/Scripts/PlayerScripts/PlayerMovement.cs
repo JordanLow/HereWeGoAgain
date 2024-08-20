@@ -40,7 +40,10 @@ public class PlayerMovement : MonoBehaviour
 			move = thrustSpeed;
 			GetComponent<Rigidbody2D>().velocity = new Vector2(thrustDirection.x * move, thrustDirection.y * move);
 			thrusting -= Time.deltaTime;
-			if (thrusting <= 0f) thrusting = 0f;
+			if (thrusting <= 0f) {
+				thrusting = 0f;
+				GetComponent<PlayerCombat>().finishSpecial();
+			}
 			return;
 		}
 		if (moveInput.magnitude == 0) {

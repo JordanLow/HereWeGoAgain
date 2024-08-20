@@ -10,6 +10,14 @@ public class EnemyHealth : MonoBehaviour
 		health -= damage;
 	}
 	
+	public void takeKnockback(Quaternion angle, float distance) {
+		// knockback
+	}
+	
+	public void takeStun(float duration) {
+		// duration
+	}
+	
 	void Update() {
 		if (health <= 0) Destroy(gameObject);
 	}

@@ -9,7 +9,10 @@ public class PlayerHealth : MonoBehaviour
 	public int maxHealth = 30;
     public int health = 30;
 	
+	private bool invuln = false;
+	
 	public void takeHit(int damage) {
+		if (invuln) return;
 		health -= damage;
 		healthSlider.value = health;
 	}
@@ -23,5 +26,9 @@ public class PlayerHealth : MonoBehaviour
 
 	private void Die(){
 		Debug.Log("Death");
+	}
+	
+	public void setInvuln(bool inv) {
+		invuln = inv;
 	}
 }

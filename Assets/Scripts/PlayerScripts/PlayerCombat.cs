@@ -36,12 +36,17 @@ public class PlayerCombat : MonoBehaviour
 		resource -= 10;
 		resourceSlider.value = resource;
 		cooldown = 0.6f;
+		GetComponent<PlayerHealth>().setInvuln(true);
 		GameObject thrust = Instantiate(specialClaymore, indicatorOrigin.position, indicatorOrigin.rotation);
 		thrust.transform.parent = transform;
 		Animator animator = thrust.GetComponent<Animator>();
 		thrust.GetComponent<ClaymoreThrust>().setPlayer(this);
 		animator.Play("Claymore Thrust");
 		GetComponent<PlayerMovement>().Thrust(indicatorOrigin.rotation);
+	}
+	
+	public void finishSpecial() {
+		GetComponent<PlayerHealth>().setInvuln(false);
 	}
 
     void Update()
