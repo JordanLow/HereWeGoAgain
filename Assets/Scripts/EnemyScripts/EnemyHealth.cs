@@ -11,11 +11,12 @@ public class EnemyHealth : MonoBehaviour
 	}
 	
 	public void takeKnockback(Quaternion angle, float distance) {
-		// knockback
+		Vector3 direction = angle * Vector3.right;
+		GetComponent<EnemyMovement>().getPushed(direction, distance);
 	}
 	
 	public void takeStun(float duration) {
-		// duration
+		GetComponent<EnemyMovement>().getStunned(duration);
 	}
 	
 	void Update() {

@@ -12,6 +12,8 @@ public class EnemyAttack : MonoBehaviour
 	EnemyMovement movement;
 	Animator animator;
 	
+	Coroutine attackRoutine; 
+	
 	float[] windUpFlashArray = { 0.2f, 0.15f, 0.15f, 0.1f, 0.1f };
 	float[] coolDownFlashArray = { 0.1f, 0.15f, 0.2f, 0.25f, 0.3f };
 	
@@ -46,9 +48,17 @@ public class EnemyAttack : MonoBehaviour
 		if (contactDamageCooldown > 0f) contactDamageCooldown -= Time.deltaTime;
 		if (contactDamageCooldownDuration <= 0f) contactDamageCooldown = 0f;
 		if (movement.DistanceFromPlayer() < 2) {
-			if (!attacking) StartCoroutine(MakeAttack());
+			if (!attacking && !GetComponent<EnemyMovement>().isStunned()) attackRoutine = StartCoroutine(MakeAttack());
 		}
     }
+	
+	public void getStunned() {
+		StopCoroutine(attackRoutine);
+		attacking = false;
+		mat.SetFloat("_FlashAmount", 0f);
+		animator.SetBool("HobblerFreeze", false);
+		animator.ResetTrigger("HobblerAttacking");
+	}
 	
 	private IEnumerator MakeAttack() {
 		attacking = true;

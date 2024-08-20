@@ -795,6 +795,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1081442100680977416, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081442100680977417, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
+      propertyPath: stunIcon
+      value: 
+      objectReference: {fileID: 2433435843318357417, guid: 9225f9d2479b5a94fad8135f64e1739d, type: 3}
+    - target: {fileID: 1081442100680977421, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1081442100680977906, guid: 5edae734ddcb0654596f364d3b0df54b, type: 3}
       propertyPath: m_Name
       value: Hobbler
@@ -1105,7 +1117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280091385}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.008, y: 0.05, z: 0}
+  m_LocalPosition: {x: 1.18, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
